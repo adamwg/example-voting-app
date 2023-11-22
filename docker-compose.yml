@@ -28,13 +28,18 @@ services:
     build: ./result
     # use nodemon rather than node for local dev
     entrypoint: nodemon --inspect=0.0.0.0 server.js
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
     depends_on:
       db:
         condition: service_healthy 
     volumes:
       - ./result:/usr/local/app
     ports:
-      - "5001:80"
+      - "5002:80"
       - "127.0.0.1:9229:9229"
     networks:
       - front-tier
@@ -43,6 +48,11 @@ services:
   worker:
     build:
       context: ./worker
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
     depends_on:
       redis:
         condition: service_healthy 
