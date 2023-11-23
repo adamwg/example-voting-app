@@ -7,7 +7,6 @@ var bg2 = document.getElementById('background-stats-2');
 app.controller('statsCtrl', function($scope){
   $scope.aPercent = 50;
   $scope.bPercent = 50;
-
   var updateScores = function(){
     socket.on('scores', function (json) {
        data = JSON.parse(json);
@@ -20,6 +19,8 @@ app.controller('statsCtrl', function($scope){
        bg2.style.width = percentages.b + "%";
 
        $scope.$apply(function () {
+         $scope.aName = data.aName;
+         $scope.bName = data.bName;
          $scope.aPercent = percentages.a;
          $scope.bPercent = percentages.b;
          $scope.total = a + b;

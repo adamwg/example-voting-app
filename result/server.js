@@ -18,7 +18,7 @@ io.on('connection', function (socket) {
 });
 
 var pool = new Pool({
-  connectionString: `postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/postgres`
+  connectionString: `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/postgres`
 });
 
 async.retry(
@@ -54,7 +54,12 @@ function getVotes(client) {
 }
 
 function collectVotesFromResult(result) {
-  var votes = {a: 0, b: 0};
+  var votes = {
+    aName: process.env.OPTION_A,
+    bName: process.env.OPTION_B,
+    a: 0,
+    b: 0,
+  };
 
   result.rows.forEach(function (row) {
     votes[row.vote] = parseInt(row.count);

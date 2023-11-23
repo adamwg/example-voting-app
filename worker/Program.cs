@@ -18,8 +18,8 @@ namespace Worker
             {
                 var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
                 var dbPort = Environment.GetEnvironmentVariable("DB_PORT");
-                var dbUser = Environment.GetEnvironmentVariable("DB_USER");
-                var dbPass = Environment.GetEnvironmentVariable("DB_PASS");
+                var dbUser = Environment.GetEnvironmentVariable("DB_USERNAME");
+                var dbPass = Environment.GetEnvironmentVariable("DB_PASSWORD");
                 var pgsql = OpenDbConnection($"Server={dbHost};Port={dbPort};Username={dbUser};Password={dbPass};Database=postgres;");
                 var redisConn = OpenRedisConnection("redis");
                 var redis = redisConn.GetDatabase();

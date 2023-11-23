@@ -10,6 +10,9 @@ services:
     depends_on:
       redis:
         condition: service_healthy
+    environment:
+      OPTION_A: Frogs
+      OPTION_B: Snakes
     healthcheck: 
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 15s
@@ -31,8 +34,10 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASS: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      OPTION_A: Frogs
+      OPTION_B: Snakes
     depends_on:
       db:
         condition: service_healthy 
@@ -51,8 +56,8 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASS: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
     depends_on:
       redis:
         condition: service_healthy 
